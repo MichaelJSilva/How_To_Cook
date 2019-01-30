@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HowToCook</string>
+    <string name="url_video_title">Video URL</string>
+    <string name="ingredients_title">Ingredients</string>
+    <string name="quantity_title">Quant.</string>
+    <string name="measure">Measure unit</string>
+    <string name="step_description">What to do now ?</string>
 </resources>

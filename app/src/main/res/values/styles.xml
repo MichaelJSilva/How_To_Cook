@@ -6,6 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="toolbarStyle">@style/CustomToolbarTheme</item>
+    </style>
+
+    <!-- custom toolbar theme -->
+    <style name="CustomToolbarTheme" parent="Widget.AppCompat.Toolbar">
+        <item name="android:fontFamily">@font/pique_my_interest</item>
+
     </style>
 
 </resources>

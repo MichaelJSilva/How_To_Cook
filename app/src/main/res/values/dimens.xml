@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recipe_list_image_heigth">200dp</dimen>
+    <dimen name="recipe_list_image_width">200dp</dimen>
+    <dimen name="recipe_list_item_distance">8dp</dimen>
+    <dimen name="recipe_list_item_card_size">350dp</dimen>
+    <dimen name="step_video_heigth">350dp</dimen>
+    <dimen name="step_card_corner_size">20dp</dimen>
+    <dimen name="step_details_title_size">25sp</dimen>
+
+</resources>
