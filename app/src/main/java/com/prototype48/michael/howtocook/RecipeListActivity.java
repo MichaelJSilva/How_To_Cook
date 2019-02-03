@@ -14,6 +14,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.jakewharton.espresso.OkHttp3IdlingResource;
 import com.prototype48.michael.howtocook.Resources.RecipeIdlingResource;
 import com.prototype48.michael.howtocook.adapter.RecipeListAdapter;
 import com.prototype48.michael.howtocook.interfaces.RecipeInterface;
@@ -49,15 +50,16 @@ public class RecipeListActivity extends AppCompatActivity  {
     RecipeListAdapter mRecipeListAdapter;
 
     //test
-    //@Nullable RecipeIdlingResource recipeIdlingResource;
-    CountingIdlingResource countingIdlingResource = new CountingIdlingResource("RECIPE_LOAD");
-
+    @Nullable RecipeIdlingResource recipeIdlingResource;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list);
+
+        recipeIdlingResource = new RecipeIdlingResource();
 
 
 
@@ -67,8 +69,6 @@ public class RecipeListActivity extends AppCompatActivity  {
         // create new adapter
         mRecipeListAdapter = new RecipeListAdapter(this);
 
-        // get recipes from endpoint
-        countingIdlingResource.increment();
         this.getRecipes();
 
 
@@ -109,6 +109,10 @@ public class RecipeListActivity extends AppCompatActivity  {
 
     // get recipes method
     public void getRecipes(){
+        recipeIdlingResource.setIdleState(false);
+
+        // get recipes from endpoint
+      //  countingIdlingResource.increment();
 
         // create retrofit service
         Retrofit retrofit = new Retrofit.Builder()
@@ -117,6 +121,7 @@ public class RecipeListActivity extends AppCompatActivity  {
                 .build();
 
         RecipeInterface service = retrofit.create(RecipeInterface.class);
+
 
         // call data from endpoint
         Call<ArrayList<Recipe>> recipeCall = service.getRecipes();
@@ -137,7 +142,8 @@ public class RecipeListActivity extends AppCompatActivity  {
                     mRecipeListAdapter.setmRecipes(mRecipes);
                     loadRecipeList(mRecipeList,mRecipeListAdapter);
                 }
-                countingIdlingResource.decrement();
+                recipeIdlingResource.setIdleState(true);
+
 
             }
 
@@ -151,14 +157,11 @@ public class RecipeListActivity extends AppCompatActivity  {
 
     @VisibleForTesting
     @NonNull
-    public CountingIdlingResource getIdlingResource() {
+    public RecipeIdlingResource getIdlingResource() {
 
-        return countingIdlingResource;
+
+        return recipeIdlingResource;
     }
-
-
-
-
 
 
 }
