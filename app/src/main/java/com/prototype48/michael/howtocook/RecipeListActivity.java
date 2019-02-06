@@ -72,9 +72,6 @@ public class RecipeListActivity extends AppCompatActivity  {
         this.getRecipes();
 
 
-
-
-
     }
 
 

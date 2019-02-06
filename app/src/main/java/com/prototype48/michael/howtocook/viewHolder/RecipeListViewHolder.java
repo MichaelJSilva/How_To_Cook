@@ -1,5 +1,7 @@
 package com.prototype48.michael.howtocook.viewHolder;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,9 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.prototype48.michael.howtocook.RecipeStepsActivity;
+import com.prototype48.michael.howtocook.RecipeWidget;
 import com.prototype48.michael.howtocook.customInterface.ViewHolderInterface;
+import com.prototype48.michael.howtocook.intentServices.RecipeWidgetIntentService;
 import com.prototype48.michael.howtocook.model.Recipe;
 import com.prototype48.michael.howtocook.utils.GlobalTagUtils;
+import com.prototype48.michael.howtocook.utils.JsonUtils;
 
 public class RecipeListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -42,6 +47,12 @@ public class RecipeListViewHolder extends RecyclerView.ViewHolder implements Vie
 
         intent.putExtra(tagUtils.RECIPE__TAG,mRecipe);
         intent.putParcelableArrayListExtra(tagUtils.RECIPE_STEPS_TAG,mRecipe.getRecipeSteps());
+
+        RecipeWidgetIntentService recipeWidgetIntentService = new RecipeWidgetIntentService();
+
+        recipeWidgetIntentService.setmRecipe(mRecipe);
+
+        recipeWidgetIntentService.updateRecipeData(mContext);
 
         mContext.startActivity(intent);
 

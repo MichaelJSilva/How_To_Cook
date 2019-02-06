@@ -5,4 +5,7 @@
     <string name="quantity_title">Quant.</string>
     <string name="measure">Measure unit</string>
     <string name="step_description">What to do now ?</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="widget_select_recipe">Select a recipe</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.prototype48.michael.howtocook;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -40,17 +42,18 @@ public class RecipeStepsActivity extends AppCompatActivity {
             Intent intent = getIntent();
             mPositionedRecipe = intent.getParcelableExtra(tagUtils.RECIPE__TAG);
             stepList          = intent.getParcelableArrayListExtra(tagUtils.RECIPE_STEPS_TAG);
+
+            if (findViewById(R.id.fragment_steps_tablet_layout) != null){
+
+                loadStepsFragment(stepList,false);
+                loadStepDetailsFragment(stepList.get(0),false);
+
+            }else{
+                loadStepsFragment(stepList,true);
+            }
         }
 
 
-        if (findViewById(R.id.fragment_steps_tablet_layout) != null){
-
-            loadStepsFragment(stepList,false);
-            loadStepDetailsFragment(stepList.get(0),false);
-
-        }else{
-            loadStepsFragment(stepList,true);
-        }
     }
 
 
@@ -73,7 +76,7 @@ public class RecipeStepsActivity extends AppCompatActivity {
         stepListFragment.setArguments(bundle);
 
         if (singlePanel){
-            fragmentManager.beginTransaction().add(R.id.fragmentLayout_Single,stepListFragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentLayout_Single,stepListFragment).commit();
         }else{
             fragmentManager.beginTransaction().replace(R.id.step_list_fragment,stepListFragment).commit();
         }
