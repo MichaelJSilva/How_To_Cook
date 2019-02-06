@@ -82,7 +82,7 @@ public class StepDetailsFragment extends Fragment implements Player.EventListene
             playerView.seekTo(savedInstanceState.getLong(TAG_CURRENT_POSITION));
             playerView.setPlayWhenReady(true);
         }
-        
+
         return view;
     }
 
